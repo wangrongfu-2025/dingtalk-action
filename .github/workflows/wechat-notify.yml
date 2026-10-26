@@ -14,3 +14,6 @@ jobs:
           curl -X POST "https://sctapi.ftqq.com/${{ secrets.SERVERCHAN_SENDKEY }}.send" \
           -d "title=来自 GitHub 的提醒" \
           -d "desp=这是一条测试消息，如果你收到了，说明配置成功。"
+      - name: 发送 WxPusher 微信消息
+        run: |
+          curl "https://wxpusher.zjiecode.com/api/send/message/${{ secrets.WXPUSHER_SENDKEY }}/早上好，该看今天的日程了"
