@@ -25,3 +25,7 @@ jobs:
             "contentType": 1,
             "uids": ["${{ secrets.WXPUSHER_UID }}"]
           }'
+      - name: 发送Bark通知
+        run: |
+          curl https://api.day.app/你的Bark_Key/早上好，该看日程了
+          curl -X GET https://api.day.app/${{ secrets.BARK_KEY }}/每日提醒/早上好，该起床了?group=example&ttl=600
