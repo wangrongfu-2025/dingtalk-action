@@ -16,4 +16,11 @@ jobs:
           -d "desp=这是一条测试消息，如果你收到了，说明配置成功。"
       - name: 发送 WxPusher 微信消息
         run: |
-          curl "https://wxpusher.zjiecode.com/api/send/message/${{ secrets.WXPUSHER_SENDKEY }}/早上好，该看今天的日程了"
+          curl -X POST https://wxpusher.zjiecode.com/api/send/message/simple-push \
+          -H 'Content-Type: application/json' \
+          -d '{
+            "spt": "${{ secrets.WXPUSHER_SPT }}",
+            "content": "早上好，该看今天的日程了",
+            "summary": "每日提醒",
+            "contentType": 1
+          }'
