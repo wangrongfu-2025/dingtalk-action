@@ -28,3 +28,23 @@ jobs:
       - name: 发送Bark通知
         run: |
           curl -X GET https://api.day.app/${{ secrets.BARK_KEY }}/每日提醒/早上好，该起床了?group=example&ttl=600
+      
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Python 环境
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10' # 指定 Python 版本
+
+      - name: 安装依赖
+        run: pip install requests
+
+      - name: 运行 Python 发送脚本
+        env:
+          # 这里把 GitHub Secrets 注入到环境变量里
+          WX_APP_ID: ${{ secrets.WX_APP_ID }}
+          WX_APP_SECRET: ${{ secrets.WX_APP_SECRET }}
+          WX_OPEN_ID: ${{ secrets.WX_OPEN_ID }}
+          WX_TEMPLATE_ID: ${{ secrets.WX_TEMPLATE_ID }}
+        run: python send_wechat.py
